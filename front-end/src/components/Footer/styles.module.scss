@@ -1,0 +1,73 @@
+.container {
+  width: 100%;
+  padding: 1.5rem 1rem;
+
+  background-color: var(--light-gray);
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+
+  justify-content: space-around;
+  align-items: center;
+
+  margin: 0 auto;
+}
+
+.contact {
+  display: flex;
+}
+
+.contactIcons {
+  transition: all 0.2s;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
+}
+
+#email {
+  position: relative;
+
+  &:hover::after {
+    content: 'Copiar e-mail';
+
+    position: absolute;
+    left: -50%;
+    top: -40%;
+
+    color: white;
+    background-color: rgba($color: #000000, $alpha: 0.9);
+
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+
+    z-index: 10;
+  }
+}
+
+#github {
+  position: relative;
+
+  &:hover::after {
+    content: 'Ver no github';
+
+    position: absolute;
+    left: -50%;
+    top: -40%;
+
+    color: white;
+    background-color: rgba($color: #000000, $alpha: 0.9);
+
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+
+    z-index: 10;
+  }
+}

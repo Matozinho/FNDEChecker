@@ -5,18 +5,18 @@
 }
 
 :root {
-  --background-color: '#F2F2F2';
+  --background-color: #fcfcfc;
 
-  --confirm-green: '38BC8A';
+  --confirm-green: #38bc8a;
 
-  --light-gray: '#EBEAEA';
-  --dark-gray: '#C4C4C4';
+  --light-gray: #ebeaea;
+  --dark-gray: #c4c4c4;
 
-  --text-blue: '#2FA1D7';
-  --text-input-placeholder: '7A7A7A';
+  --text-blue: #2fa1d7;
+  --text-input-placeholder: 7a7a7a;
 
-  --white: '#FFFFFF';
-  --black: '#000000';
+  --white: #ffffff;
+  --black: #000000;
 }
 
 @media (max-width: 1080px) {
@@ -60,5 +60,6 @@ h2 {
 }
 
 button {
+  border: 0;
   cursor: pointer;
 }
