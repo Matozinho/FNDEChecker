@@ -1,5 +1,73 @@
 .container {
   width: 100vw;
-  height: 100vh;
+  height: 88vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // background-color: red;
   background-color: var(--background-color);
+}
+
+.container > main {
+  display: flex;
+  flex-direction: column;
+
+  height: 70%;
+  margin: auto 0; //alinha ao centro verticalmente
+
+  align-items: center;
+  justify-content: space-evenly;
+
+  span {
+    max-width: 55%;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-blue);
+  }
+
+  & > button {
+    background-color: var(--confirm-green);
+    padding: 1rem 2rem;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+
+    box-shadow: 4px 7px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+
+    transition: 0.25s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
+
+.input {
+  display: flex;
+  width: 60%;
+  background-color: var(--light-gray);
+  border-radius: 8px;
+
+  filter: drop-shadow(4px 7px 5px rgba(0, 0, 0, 0.25));
+
+  input {
+    padding: 1rem 1.5rem;
+    width: 100%;
+    font-size: 1.5rem;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 0 8px 8px 0;
+    background-color: var(--dark-gray);
+
+    transition: 0.25s;
+
+    &:hover:not(:disabled) {
+      filter: brightness(0.85);
+    }
+  }
 }

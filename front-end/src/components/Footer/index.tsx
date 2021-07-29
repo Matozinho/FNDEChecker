@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import Image from 'next/image'
+import Image from 'next/image';
 
 import styles from './styles.module.scss';
 
@@ -27,7 +26,7 @@ export const Footer = (): JSX.Element => {
               rel="noopener noreferrer"
             >
               <Image
-                src='/githubIcon.svg'
+                src='/icons/github.svg'
                 width={88}
                 height={69}
                 alt="Entrar em contato via email"
@@ -37,7 +36,7 @@ export const Footer = (): JSX.Element => {
           <div id={styles.email} className={styles.contactIcons}>
             <button onClick={handleCopyEmail}>
               <Image
-                src='/emailIcon.svg'
+                src='/icons/email.svg'
                 width={88}
                 height={69}
                 alt="Entrar em contato via email"

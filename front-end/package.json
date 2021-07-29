@@ -9,13 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.2",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-input-mask": "^2.0.4",
     "sass": "^1.36.0"
   },
   "devDependencies": {
     "@types/react": "17.0.15",
+    "@types/react-input-mask": "^3.0.1",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",

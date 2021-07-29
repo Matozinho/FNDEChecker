@@ -62,4 +62,12 @@ h2 {
 button {
   border: 0;
   cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+input {
+  border: 0;
 }
