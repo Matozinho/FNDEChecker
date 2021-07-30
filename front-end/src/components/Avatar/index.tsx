@@ -7,7 +7,7 @@ export const Avatar = (): JSX.Element => {
   const [isLogged, setIsLogged] = useState(false);
 
   const handleLogin = (): void => {
-    setIsLogged(!isLogged);
+    alert('Funcionalidade em desenvolvimento!');
   }
 
   return (
@@ -18,7 +18,7 @@ export const Avatar = (): JSX.Element => {
         ) : (
           <button id={styles.seeProfileButton} onClick={handleLogin}>
             <Image
-              src="/user.svg"
+            src="/icons/user.svg"
               width={38}
               height={42}
               alt="Ver perfil"

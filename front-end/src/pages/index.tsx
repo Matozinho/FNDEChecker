@@ -1,5 +1,8 @@
+import axios from 'axios';
+
 import Image from 'next/image';
 import Head from 'next/head';
+import { useContext, useState } from 'react';
 
 import InputMask from 'react-input-mask';
 
@@ -7,21 +10,51 @@ import styles from '@styles/Home.module.scss';
 
 import { Footer } from '@components/Footer';
 import { Avatar } from '@components/Avatar';
-import { useState } from 'react';
+import { HomeModal } from '@components/HomeModal';
+import { DepositContext } from '@contexts/DepositContext';
+import {LoadSpinner} from '@components/LoadSpinner';
 
 export default function Home(): JSX.Element {
+  const { setHomeModalIsOpen, setDepositsData } = useContext(DepositContext);
   const [userCPF, setUserCPF] = useState('');
+  const [useSpinner, setUseSpinner] = useState(false);
 
-  const handleSerachBenefit = (): void => {
+  const handleSerachBenefit = async (): Promise<void> => {
     const cleanCPF = userCPF
       .split('.').join('')  // remove all the .
       .split('-').join('')  // remove all the -
       .split('_').join(''); // remove all the _ (if the CPF wasn't filled correctly)
 
-    if (cleanCPF.length < 11)
+    if (cleanCPF.length < 11) {
       alert('Preencha o CPF Corretamente');
-    else
-      alert('Funcionalidade em Desenvolvimento');
+      return;
+    }
+
+    setUseSpinner(true);
+
+    try {
+      const { status, data } = await axios.post('http://localhost:8000/', {
+        cpf: cleanCPF,
+      });
+
+      if (status === 201) {
+        let idx = 0;
+        const reversedData = data.reverse();
+        Object.values(reversedData).forEach((item: any) => {
+          item['id'] = idx;
+          idx++;
+        });
+        setDepositsData(reversedData);
+        setUseSpinner(false);
+        setHomeModalIsOpen(true);
+      }
+      else
+        alert('CPF não encontrado');
+    } catch (e) {
+      setUseSpinner(false);
+      alert(`Servidor com problemas, tente mais tarde`);
+    }
+    return;
   }
 
   return (
@@ -30,6 +63,8 @@ export default function Home(): JSX.Element {
         <title>FNDEChecker | Consulta pública</title>
       </Head>
       <Avatar />
+      <HomeModal />
+      { useSpinner ? <LoadSpinner/> : <></> }
       <Image
         src="/coloredLogo.svg"
         width={250}
