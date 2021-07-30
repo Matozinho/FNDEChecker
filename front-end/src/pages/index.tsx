@@ -2,17 +2,18 @@ import axios from 'axios';
 
 import Image from 'next/image';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useContext, useState } from 'react';
 
 import InputMask from 'react-input-mask';
 
-import styles from '@styles/Home.module.scss';
+import styles from '@styles/home.module.scss';
 
 import { Footer } from '@components/Footer';
 import { Avatar } from '@components/Avatar';
 import { HomeModal } from '@components/HomeModal';
 import { DepositContext } from '@contexts/DepositContext';
-import {LoadSpinner} from '@components/LoadSpinner';
+import { LoadSpinner } from '@components/LoadSpinner';
 
 export default function Home(): JSX.Element {
   const { setHomeModalIsOpen, setDepositsData } = useContext(DepositContext);
@@ -64,7 +65,7 @@ export default function Home(): JSX.Element {
       </Head>
       <Avatar />
       <HomeModal />
-      { useSpinner ? <LoadSpinner/> : <></> }
+      {useSpinner ? <LoadSpinner /> : <></>}
       <Image
         src="/coloredLogo.svg"
         width={250}
@@ -92,7 +93,9 @@ export default function Home(): JSX.Element {
 
         <span>Gostaria de facilitar a verificação das bolsas de seu grupo? Faça cadastro do e-mail/telefone de seus membros e seja notificado quando a bolsa cair! :)</span>
 
-        <button onClick={(): void => alert("Funcionalidade em desenvolvimento")}>Cadastrar seu grupo</button>
+        <Link href="/register">
+          <button>Cadastrar seu grupo</button>
+        </Link>
       </main>
       <Footer />
     </div>
