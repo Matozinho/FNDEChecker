@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -42,23 +42,26 @@ function getStepContent(stepIndex: number): JSX.Element {
 }
 
 export function Assistent(): JSX.Element {
-  const [activeStep, setActiveStep] = useState(0);
-  const { setStartLoadSpinner } = useContext(RegisterContext);
+  const {
+    setStartLoadSpinner,
+    activeStep,
+    setActiveStep
+  } = useContext(RegisterContext);
 
   const classes = useStyles();
   const steps = getSteps();
 
-  const handleNext = (): void => {
+  const handleNext = async (): Promise<any> => {
     if (activeStep === 2) {
       setStartLoadSpinner(true);
     }
     else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setActiveStep((prevActiveStep: any) => prevActiveStep + 1);
     }
   };
 
   const handleBack = (): void => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep((prevActiveStep: any) => prevActiveStep - 1);
   };
 
   return (
@@ -87,3 +90,4 @@ export function Assistent(): JSX.Element {
     </div>
   );
 }
+

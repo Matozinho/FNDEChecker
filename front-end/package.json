@@ -13,6 +13,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.34",
     "axios": "^0.21.1",
     "next": "11.0.1",
+    "next-auth": "^3.27.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-input-mask": "^2.0.4",

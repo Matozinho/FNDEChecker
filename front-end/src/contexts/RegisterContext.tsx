@@ -21,6 +21,7 @@ interface RegisterContextType {
   UF: string;
   city: string;
   startLoadSpinner: boolean;
+  activeStep: number;
   setEmail: (value: string) => void;
   setPassword: (value: string) => void;
   setGroupName: (value: string) => void;
@@ -28,6 +29,7 @@ interface RegisterContextType {
   setUF: (value: string) => void;
   setCity: (value: string) => void;
   setStartLoadSpinner: (value: boolean) => void;
+  setActiveStep: (value: any) => void;
 }
 
 export const RegisterContext = createContext({} as RegisterContextType);
@@ -40,6 +42,7 @@ export function RegisterContextProvider(props: RegisterContextProviderProps): JS
   const [UF, setUF] = useState('');
   const [city, setCity] = useState('');
   const [startLoadSpinner, setStartLoadSpinner] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
 
   return (
     <RegisterContext.Provider value={{
@@ -50,13 +53,15 @@ export function RegisterContextProvider(props: RegisterContextProviderProps): JS
       UF,
       city,
       startLoadSpinner,
+      activeStep,
       setEmail,
       setPassword,
       setGroupName,
       setIES,
       setUF,
       setCity,
-      setStartLoadSpinner
+      setStartLoadSpinner,
+      setActiveStep
     }}>
       {props.children}
     </RegisterContext.Provider>

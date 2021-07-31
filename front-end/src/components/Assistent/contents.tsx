@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import emailStyles from './emailStyles.module.scss';
 import groupDataStyles from './groupsStyles.module.scss';
@@ -8,12 +8,28 @@ import acomplishmentsStyles from './acomplishments.module.scss';
 
 import { RegisterContext } from "@contexts/RegisterContext";
 
+import { getSession, signIn } from "next-auth/client";
+
 export const EmailContent = (): JSX.Element => {
-  const { setEmail, setPassword } = useContext(RegisterContext);
+  const { setEmail, setPassword, setActiveStep } = useContext(RegisterContext);
+
+  useEffect(() => {
+    (async (): Promise<any> => {
+      const session: any = await getSession();
+      if (session) {
+        setEmail(session.user?.email);
+        setActiveStep((prevActiveStep: any) => prevActiveStep + 1);
+      }
+    })();
+  }, []);
+
+  const handleRegister = (): void => {
+    signIn('google', { modal: true });
+  }
 
   return (
     <div className={emailStyles.contentWrapper}>
-      <div className={emailStyles.googleButton}>
+      <div onClick={handleRegister} className={emailStyles.googleButton}>
         <div>
           <Image
             src="/icons/google.svg"
@@ -46,7 +62,7 @@ export const EmailContent = (): JSX.Element => {
           placeholder="senha"
         />
       </form>
-    </div>
+    </div >
   );
 }
 

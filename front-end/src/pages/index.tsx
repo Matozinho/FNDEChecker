@@ -14,11 +14,14 @@ import { Avatar } from '@components/Avatar';
 import { HomeModal } from '@components/HomeModal';
 import { DepositContext } from '@contexts/DepositContext';
 import { LoadSpinner } from '@components/LoadSpinner';
+import { useSession } from 'next-auth/client';
 
 export default function Home(): JSX.Element {
   const { setHomeModalIsOpen, setDepositsData } = useContext(DepositContext);
   const [userCPF, setUserCPF] = useState('');
   const [useSpinner, setUseSpinner] = useState(false);
+
+  const [session] = useSession();
 
   const handleSerachBenefit = async (): Promise<void> => {
     const cleanCPF = userCPF
@@ -67,6 +70,7 @@ export default function Home(): JSX.Element {
       <HomeModal />
       {useSpinner ? <LoadSpinner /> : <></>}
       <Image
+        onClick={(): void => console.log(session)}
         src="/coloredLogo.svg"
         width={250}
         height={130}
@@ -90,14 +94,17 @@ export default function Home(): JSX.Element {
             />
           </button>
         </div>
+        {session ? <></> : (
+          <>
+            <span>Gostaria de facilitar a verificação das bolsas de seu grupo? Faça cadastro do e-mail/telefone de seus membros e seja notificado quando a bolsa cair! :)</span>
 
-        <span>Gostaria de facilitar a verificação das bolsas de seu grupo? Faça cadastro do e-mail/telefone de seus membros e seja notificado quando a bolsa cair! :)</span>
-
-        <Link href="/register">
-          <button>Cadastrar seu grupo</button>
-        </Link>
+            <Link href="/register">
+              <button>Cadastrar seu grupo</button>
+            </Link>
+          </>
+        )}
       </main>
       <Footer />
-    </div>
+    </div >
   )
 }
