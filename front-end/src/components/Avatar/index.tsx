@@ -2,8 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import cookieCutter from 'cookie-cutter';
-
 import styles from './styles.module.scss';
 
 export const Avatar = (): JSX.Element => {
@@ -11,8 +9,9 @@ export const Avatar = (): JSX.Element => {
   const router = useRouter();
 
   useEffect((): void => {
-    if(cookieCutter.get('sessionToken')) 
+    if (document.cookie) {
       setIsLogged(true);
+    }
   }, []);
 
   const handleLogin = (): void => {

@@ -1,11 +1,10 @@
 import {useRouter} from "next/router";
-import cookieCutter from 'cookie-cutter';
 
 export default function Profile(): JSX.Element {
   const router = useRouter();
 
   const handleLogOut = (): void => {
-    cookieCutter.set('sessionToken', '', { expires: new Date(0) });
+    document.cookie = 'sessionToken =; Max-Age=0;';    
     router.push('/');
   }
 

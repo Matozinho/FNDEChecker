@@ -5,7 +5,6 @@ import {LoadSpinner} from '@components/LoadSpinner';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import cookieCutter from 'cookie-cutter';
 
 import styles from '@styles/login.module.scss';
 import {useRouter} from 'next/router';
@@ -26,7 +25,7 @@ export default function Login(): JSX.Element {
       });
 
       if (resp.status === 201) {
-        cookieCutter.set('sessionToken', resp.data.access_token);
+        document.cookie = `sessionToken = ${resp.data.access_token}`;
         router.push('/profile');
       } 
     }catch(e) {
