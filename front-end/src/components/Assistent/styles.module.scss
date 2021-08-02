@@ -3,6 +3,14 @@
   position: relative;
 }
 
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  background-color: var(--light-gray);
+}
+
 .controlButton {
   display: flex;
 

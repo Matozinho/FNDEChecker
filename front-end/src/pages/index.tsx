@@ -1,9 +1,10 @@
 import axios from 'axios';
+import cookieCutter from 'cookie-cutter';
 
 import Image from 'next/image';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import InputMask from 'react-input-mask';
 
@@ -14,14 +15,17 @@ import { Avatar } from '@components/Avatar';
 import { HomeModal } from '@components/HomeModal';
 import { DepositContext } from '@contexts/DepositContext';
 import { LoadSpinner } from '@components/LoadSpinner';
-import { useSession } from 'next-auth/client';
 
 export default function Home(): JSX.Element {
   const { setHomeModalIsOpen, setDepositsData } = useContext(DepositContext);
   const [userCPF, setUserCPF] = useState('');
   const [useSpinner, setUseSpinner] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
-  const [session] = useSession();
+  useEffect(():void => {
+    if (cookieCutter.get('sessionToken'))
+      setIsLogged(true);
+  }, []);
 
   const handleSerachBenefit = async (): Promise<void> => {
     const cleanCPF = userCPF
@@ -36,8 +40,10 @@ export default function Home(): JSX.Element {
 
     setUseSpinner(true);
 
+    console.log(`${process.env.API_URL}/search`);
+
     try {
-      const { status, data } = await axios.post('http://localhost:8000/', {
+      const { status, data } = await axios.post(`${process.env.API_URL}/search`, {
         cpf: cleanCPF,
       });
 
@@ -70,7 +76,6 @@ export default function Home(): JSX.Element {
       <HomeModal />
       {useSpinner ? <LoadSpinner /> : <></>}
       <Image
-        onClick={(): void => console.log(session)}
         src="/coloredLogo.svg"
         width={250}
         height={130}
@@ -94,7 +99,7 @@ export default function Home(): JSX.Element {
             />
           </button>
         </div>
-        {session ? <></> : (
+        {isLogged ? <></> : (
           <>
             <span>Gostaria de facilitar a verificação das bolsas de seu grupo? Faça cadastro do e-mail/telefone de seus membros e seja notificado quando a bolsa cair! :)</span>
 

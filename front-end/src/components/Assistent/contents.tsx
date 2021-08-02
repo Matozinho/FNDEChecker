@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 import emailStyles from './emailStyles.module.scss';
 import groupDataStyles from './groupsStyles.module.scss';
@@ -8,23 +8,11 @@ import acomplishmentsStyles from './acomplishments.module.scss';
 
 import { RegisterContext } from "@contexts/RegisterContext";
 
-import { getSession, signIn } from "next-auth/client";
-
 export const EmailContent = (): JSX.Element => {
-  const { setEmail, setPassword, setActiveStep } = useContext(RegisterContext);
-
-  useEffect(() => {
-    (async (): Promise<any> => {
-      const session: any = await getSession();
-      if (session) {
-        setEmail(session.user?.email);
-        setActiveStep((prevActiveStep: any) => prevActiveStep + 1);
-      }
-    })();
-  }, []);
+  const { setEmail, setPassword } = useContext(RegisterContext);
 
   const handleRegister = (): void => {
-    signIn('google', { modal: true });
+    alert('Funcinoalidade em Desenvolvimento');
   }
 
   return (

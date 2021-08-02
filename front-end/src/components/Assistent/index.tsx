@@ -7,15 +7,16 @@ import { EmailContent, EndContent, ErrorContent, GroupDataContent } from './cont
 
 import styles from './styles.module.scss';
 import { RegisterContext } from '@contexts/RegisterContext';
+import axios from 'axios';
+import {useRouter} from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '80%',
+      width: '90%',
       margin: '0 auto',
       padding: '1 2rem',
-      borderRadius: '25px',
-      backgroundColor: 'var(--light-gray)',
+      backgroundColor: '#ebeaea',
     },
     instructions: {
       marginTop: theme.spacing(1),
@@ -45,15 +46,44 @@ export function Assistent(): JSX.Element {
   const {
     setStartLoadSpinner,
     activeStep,
-    setActiveStep
+    setActiveStep,
+    email,
+    password,
+    IES,
+    groupName,
+    city,
+    UF,
   } = useContext(RegisterContext);
 
+  const router = useRouter();
   const classes = useStyles();
   const steps = getSteps();
 
   const handleNext = async (): Promise<any> => {
     if (activeStep === 2) {
       setStartLoadSpinner(true);
+      if (password && email && IES && groupName && city && UF) {
+        try {
+          const resp = await axios.post(`${process.env.API_URL}/group`, {
+            email,
+            password,
+            city,
+            UF,
+            IES,
+            groupname: groupName
+          });
+
+          if (resp.status === 201){
+            alert('Conta Cadastrada com sucesso');
+            router.push('/');
+          }
+        } catch (e) {
+          alert('Problema com o servidor, tente mais tarde');
+        }
+      } else {
+        alert('Preencha os campos corretamente');
+      }
+      setStartLoadSpinner(false);
     }
     else {
       setActiveStep((prevActiveStep: any) => prevActiveStep + 1);
@@ -65,7 +95,7 @@ export function Assistent(): JSX.Element {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={styles.wrapper}>
       <Stepper className={classes.root} activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
