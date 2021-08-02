@@ -1,5 +1,4 @@
 import axios from 'axios';
-import cookieCutter from 'cookie-cutter';
 
 import Image from 'next/image';
 import Head from 'next/head';
@@ -23,8 +22,9 @@ export default function Home(): JSX.Element {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(():void => {
-    if (cookieCutter.get('sessionToken'))
+    if (document.cookie) {
       setIsLogged(true);
+    }
   }, []);
 
   const handleSerachBenefit = async (): Promise<void> => {
