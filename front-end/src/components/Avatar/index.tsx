@@ -9,7 +9,7 @@ export const Avatar = (): JSX.Element => {
   const router = useRouter();
 
   useEffect((): void => {
-    if (document.cookie) {
+    if (document.cookie.includes("sessionToken")) {
       setIsLogged(true);
     }
   }, []);

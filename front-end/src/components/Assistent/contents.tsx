@@ -7,12 +7,17 @@ import groupDataStyles from './groupsStyles.module.scss';
 import acomplishmentsStyles from './acomplishments.module.scss';
 
 import { RegisterContext } from "@contexts/RegisterContext";
+import axios from "axios";
 
 export const EmailContent = (): JSX.Element => {
   const { setEmail, setPassword } = useContext(RegisterContext);
 
-  const handleRegister = (): void => {
-    alert('Funcinoalidade em Desenvolvimento');
+  const handleRegister = async (): Promise<void> => {
+    try {
+      await axios.get(`${process.env.API_URL}/auth/oauth`);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (

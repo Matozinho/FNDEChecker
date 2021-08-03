@@ -22,7 +22,7 @@ export default function Home(): JSX.Element {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(():void => {
-    if (document.cookie) {
+    if (document.cookie.includes("sessionToken")) {
       setIsLogged(true);
     }
   }, []);
@@ -62,7 +62,7 @@ export default function Home(): JSX.Element {
         alert('CPF não encontrado');
     } catch (e) {
       setUseSpinner(false);
-      alert(`Servidor com problemas, tente mais tarde`);
+      alert(e.response.data.error);
     }
     return;
   }

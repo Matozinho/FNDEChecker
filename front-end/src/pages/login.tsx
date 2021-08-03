@@ -25,7 +25,7 @@ export default function Login(): JSX.Element {
       });
 
       if (resp.status === 201) {
-        document.cookie = `sessionToken = ${resp.data.access_token}`;
+          document.cookie = `sessionToken = ${resp.data.accessToken}`;
         router.push('/profile');
       } 
     }catch(e) {
