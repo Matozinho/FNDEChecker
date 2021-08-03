@@ -14,9 +14,14 @@ export const EmailContent = (): JSX.Element => {
 
   const handleRegister = async (): Promise<void> => {
     try {
-      await axios.get(`${process.env.API_URL}/auth/oauth`);
+      // TODO: Enhance this... later.
+      await axios.get(`${process.env.API_URL}/auth/oauth`, {
+        headers: {
+            "Access-Control-Allow-Origin": "*"
+          }
+      })
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }
 
